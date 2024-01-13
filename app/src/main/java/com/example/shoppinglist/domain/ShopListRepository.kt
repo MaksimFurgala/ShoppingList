@@ -1,5 +1,6 @@
 package com.example.shoppinglist.domain
 
+import androidx.lifecycle.LiveData
 import java.util.UUID
 
 interface ShopListRepository {
@@ -7,5 +8,5 @@ interface ShopListRepository {
     fun deleteShopItem(shopItem: ShopItem)
     fun editShopItem(shopItem: ShopItem)
     fun getShopItem(shopItemGuid: UUID) : ShopItem
-    fun getShopList(): List<ShopItem>
+    fun getShopList(): LiveData<List<ShopItem>>
 }
