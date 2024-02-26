@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">ShoppingList</string>
     <string name="add_new_shop_item">Add new shop item</string>
+    <string name="title_activity_shop_item">ShopItemActivity</string>
+    <string name="error_input_count">Please enter the count!</string>
+    <string name="error_input_name">Please enter the name!</string>
 </resources>
