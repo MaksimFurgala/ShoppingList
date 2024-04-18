@@ -1,9 +1,12 @@
 package com.example.shoppinglist.domain
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import java.util.UUID
 
+/**
+ * Интерфейс репозитория списка покупок.
+ *
+ * @constructor Create empty Shop list repository
+ */
 interface ShopListRepository {
     fun addShopItem(shopItem: ShopItem)
     fun deleteShopItem(shopItem: ShopItem)

@@ -9,12 +9,23 @@ import com.example.shoppinglist.domain.EditShopItemUseCase
 import com.example.shoppinglist.domain.GetShopItemUseCase
 import com.example.shoppinglist.domain.ShopItem
 
+/**
+ * View model для элемента в списке покупок.
+ *
+ * @constructor Create empty Shop item view model
+ */
 class ShopItemViewModel : ViewModel() {
+    /**
+     * Репозиторий.
+     */
     private val repository = ShopListRepositoryImpl
 
+    // region UseCase-ы бизнес логики
+    // TODO: в будущем можно реализовать вариант с более правильной и красивой передачей repository через Dagger) 
     private val getShopItemUseCase = GetShopItemUseCase(repository)
     private val addShopItemUseCase = AddShopItemUseCase(repository)
     private val editShopItemUseCase = EditShopItemUseCase(repository)
+    // endregion
 
     private val _errorInputName = MutableLiveData<Boolean>()
     val errorInputName: LiveData<Boolean>

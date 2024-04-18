@@ -37,8 +37,14 @@ class ShopItemFragment : Fragment() {
         }
     }
 
+    /**
+     *  Событие On create
+     *
+     * @param savedInstanceState
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // парсинг параметров для фрагмента
         parseParams()
     }
 
@@ -95,6 +101,9 @@ class ShopItemFragment : Fragment() {
         }
     }
 
+    /**
+     * Добавление слушателей для полей с возможностью ввода текста
+     */
     private fun addTextChangeListeners() {
         etName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -123,6 +132,9 @@ class ShopItemFragment : Fragment() {
         })
     }
 
+    /**
+     * Запуск фрагмента в режиме редактирования выбранного элемента в списке покупок.
+     */
     private fun launchEditMode() {
         viewModel.getShopItem(shopItemId)
         viewModel.shopItem.observe(viewLifecycleOwner) {
@@ -134,12 +146,19 @@ class ShopItemFragment : Fragment() {
         }
     }
 
+    /**
+     * Запуск фрагмента в режиме добавления нового элемента в список покупок.
+     */
     private fun launchAddMode() {
         buttonSave.setOnClickListener {
             viewModel.addShopItem(etName.text?.toString(), etCount.text?.toString())
         }
     }
 
+    /**
+     * Парсинг аргументов из текущего фрагмента, которые переданы из activity или фрагмента.
+     *
+     */
     private fun parseParams() {
         val args = requireArguments()
         if (!args.containsKey(SCREEN_MODE))
@@ -155,6 +174,11 @@ class ShopItemFragment : Fragment() {
         }
     }
 
+    /**
+     * Инициализируем элементы view через стандартный поиск элементов.
+     *
+     * @param view - текущая view для фрагмента
+     */
     private fun initViews(view: View) {
         tilName = view.findViewById(R.id.til_name)
         tilCount = view.findViewById(R.id.til_count)
@@ -168,6 +192,11 @@ class ShopItemFragment : Fragment() {
         fun onEditingFinished()
     }
 
+    /**
+     * Вспомогательный объект для элемента списка покупок.
+     *
+     * @constructor Create empty Companion
+     */
     companion object {
         private const val SCREEN_MODE = "extra_mode"
         private const val SHOP_ITEM_ID = "extra_shop_item_id"

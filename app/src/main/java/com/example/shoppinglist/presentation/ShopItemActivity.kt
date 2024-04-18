@@ -29,6 +29,9 @@ class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinished
             .commit()
     }
 
+    /**
+     * Парсинг данных в зависимости от того какие параметры были переданы в Intent.
+     */
     private fun  parseIntent() {
         if (!intent.hasExtra(EXTRA_SCREEN_MODE))
             throw RuntimeException("Param screen mode is absent.")
@@ -43,6 +46,11 @@ class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinished
         }
     }
 
+    /**
+     * Вспомогательный объект для хранения констант и статических методов для создания
+     * ShopItemActivity.
+     * @constructor Create empty Companion
+     */
     companion object {
         private const val EXTRA_SCREEN_MODE = "extra_mode"
         private const val EXTRA_SHOP_ITEM_ID = "extra_shop_item_id"
@@ -50,12 +58,25 @@ class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinished
         private const val MODE_ADD = "mode_add"
         private const val MODE_UNKNOWN = ""
 
+        /**
+         * Запуск activity в режиме добавления и передача параметров.
+         *
+         * @param context - контекст
+         * @return - Intent
+         */
         fun newIntentAddItem(context: Context): Intent {
             return Intent(context, ShopItemActivity::class.java).apply {
                 putExtra(EXTRA_SCREEN_MODE, MODE_ADD)
             }
         }
 
+        /**
+         * Запуск activity в режиме редактирования и передача параметров.
+         *
+         * @param context - контекст
+         * @param shopItemId - id элемента списка покупок
+         * @return - Intent
+         */
         fun newIntentEditItem(context: Context, shopItemId: Int): Intent {
             return Intent(context, ShopItemActivity::class.java).apply {
                 putExtra(EXTRA_SCREEN_MODE, MODE_EDIT)
@@ -64,6 +85,9 @@ class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinished
         }
     }
 
+    /**
+     * Завершение редактирования элемента списка.
+     */
     override fun onEditingFinished() {
         finish()
     }

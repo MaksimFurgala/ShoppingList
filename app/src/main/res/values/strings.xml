@@ -4,4 +4,5 @@
     <string name="title_activity_shop_item">ShopItemActivity</string>
     <string name="error_input_count">Please enter the count!</string>
     <string name="error_input_name">Please enter the name!</string>
+    <string name="save_button_shop_item_text">Save</string>
 </resources>

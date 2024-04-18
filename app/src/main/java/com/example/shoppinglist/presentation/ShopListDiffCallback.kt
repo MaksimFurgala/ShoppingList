@@ -3,6 +3,15 @@ package com.example.shoppinglist.presentation
 import androidx.recyclerview.widget.DiffUtil
 import com.example.shoppinglist.domain.ShopItem
 
+/**
+ * Колбек для сравнения элементов в recycler view (не используется, так как чуть медленно работает).
+ * Способ сравнения списков (старый и новый список).
+ * (в варианте с ShopItemDiffCallback более короткая запись и более производительный и красивый вариант).
+ *
+ * @property oldList
+ * @property newList
+ * @constructor Create empty Shop list diff callback
+ */
 class ShopListDiffCallback(
     private val oldList: List<ShopItem>,
     private val newList: List<ShopItem>

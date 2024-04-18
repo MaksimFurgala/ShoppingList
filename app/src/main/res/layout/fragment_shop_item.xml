@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".presentation.ShopItemFragment">
 
+    <!-- Имя элемента покупок -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_name"
         android:layout_width="0dp"
@@ -27,6 +28,7 @@
             android:inputType="textCapWords" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Количество-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_count"
         android:layout_width="0dp"
@@ -48,12 +50,13 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!--Сохранение результата-->
     <Button
         android:id="@+id/save_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Save"
+        android:text="@string/save_button_shop_item_text"
         app:layout_constraintStart_toStartOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
