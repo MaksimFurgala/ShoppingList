@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shoppinglist.R
+import com.example.shoppinglist.databinding.ActivityMainBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 /**
@@ -27,11 +28,7 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
      */
     private lateinit var shopListAdapter: ShopListAdapter
 
-    /**
-     * Контейнер для хранения фрагмента: элемент списка покупок
-     * (новый или текущий элемент в списке покупок).
-     */
-    private var shopItemContainer: FragmentContainerView? = null
+    private lateinit var binding: ActivityMainBinding
 
     /**
      * Событие On create
@@ -41,13 +38,8 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        /**
-         * Установка макета для activity и контейнера для хранения нового
-         * или текущего элемента в списке покупок.
-         */
-        setContentView(R.layout.activity_main)
-        shopItemContainer = findViewById(R.id.shop_item_container)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // инициализация recycler view по отображению списка покупок
         setupRecyclerView()
@@ -62,8 +54,7 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
          * Добавление нового элемента списка (инициализация обработчика
          * по добавлению нового элемента списка покупок)
          */
-        val buttonAddItem = findViewById<FloatingActionButton>(R.id.button_add_shop_item)
-        buttonAddItem.setOnClickListener {
+        binding.buttonAddShopItem.setOnClickListener {
             // если режим отображения в одну колонку, то вызываем новую activity
             if (isOnePaneMode()) {
                 val intent = ShopItemActivity.newIntentAddItem(this)
@@ -89,7 +80,7 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
      * @return
      */
     private fun isOnePaneMode():Boolean {
-        return shopItemContainer == null
+        return binding.shopItemContainer == null
     }
 
     /**
@@ -109,8 +100,7 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
      * Настройка recycler view со списком покупок.
      */
     private fun setupRecyclerView() {
-        val rvShopList = findViewById<RecyclerView>(R.id.rv_shop_list)
-        with(rvShopList) {
+        with(binding.rvShopList) {
             shopListAdapter = ShopListAdapter()
             adapter = shopListAdapter
 
@@ -127,7 +117,7 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
         // инициализация обработчиков для recycler view
         setupLongClickListener()
         setupClickListener()
-        setupSwipeListener(rvShopList)
+        setupSwipeListener(binding.rvShopList)
     }
 
     /**

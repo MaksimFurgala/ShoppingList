@@ -3,8 +3,12 @@ package com.example.shoppinglist.presentation
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.ListAdapter
 import com.example.shoppinglist.R
+import com.example.shoppinglist.databinding.ItemShopDisabledBinding
+import com.example.shoppinglist.databinding.ItemShopEnabledBinding
 import com.example.shoppinglist.domain.ShopItem
 
 /**
@@ -29,8 +33,9 @@ class ShopListAdapter : ListAdapter<ShopItem, ShopItemViewHolder>(ShopItemDiffCa
             VIEW_TYPE_DISABLED -> R.layout.item_shop_disabled
             else -> throw RuntimeException("Unknown view type $viewType")
         }
-        val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
-        return ShopItemViewHolder(view)
+        val binding = DataBindingUtil.inflate<ViewDataBinding>(LayoutInflater.from(parent.context), layout, parent, false)
+        //val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
+        return ShopItemViewHolder(binding)
     }
 
     /**
@@ -41,20 +46,28 @@ class ShopListAdapter : ListAdapter<ShopItem, ShopItemViewHolder>(ShopItemDiffCa
      */
     override fun onBindViewHolder(viewHolder: ShopItemViewHolder, position: Int) {
         val shopItem = getItem(position)
-        viewHolder.tvName.text = shopItem.name
-        viewHolder.tvCount.text = shopItem.count.toString()
+        val binding = viewHolder.binding
         // в зависимости от типа элемента устанавливаем разные цвета для текстов
-        if (shopItem.enabled)
-            viewHolder.tvName.setTextColor(ContextCompat.getColor(viewHolder.view.context, R.color.black))
-        else
-            viewHolder.tvName.setTextColor(ContextCompat.getColor(viewHolder.view.context, R.color.white))
-        viewHolder.view.setOnLongClickListener {
+//        if (shopItem.enabled)
+//            binding.tvName.setTextColor(ContextCompat.getColor(viewHolder.view.context, R.color.black))
+//        else
+//            viewHolder.tvName.setTextColor(ContextCompat.getColor(viewHolder.view.context, R.color.white))
+        binding.root.setOnLongClickListener {
             onShopItemLongClickListener?.invoke(shopItem)
             true
         }
-        viewHolder.view.setOnClickListener{
+        binding.root.setOnClickListener{
             onShopItemClickListener?.invoke(shopItem)
         }
+        when(binding) {
+            is ItemShopDisabledBinding -> {
+                binding.shopItem = shopItem
+            }
+            is ItemShopEnabledBinding -> {
+                binding.shopItem = shopItem
+            }
+        }
+
     }
 
     /**

@@ -2,8 +2,10 @@ package com.example.shoppinglist.presentation
 
 import android.view.View
 import android.widget.TextView
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shoppinglist.R
+import com.example.shoppinglist.databinding.ItemShopDisabledBinding
 
 /**
  * View holder для recycler view
@@ -11,7 +13,4 @@ import com.example.shoppinglist.R
  * @property view
  * @constructor Create empty Shop item view holder
  */
-class ShopItemViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-    val tvName = view.findViewById<TextView>(R.id.tv_shop_item_name)
-    val tvCount = view.findViewById<TextView>(R.id.tv_shop_item_count)
-}
+class ShopItemViewHolder(val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root)
