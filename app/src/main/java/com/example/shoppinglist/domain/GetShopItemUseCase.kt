@@ -13,7 +13,7 @@ class GetShopItemUseCase(private val shopListRepository: ShopListRepository) {
      * @param shopItemId - id элемента списка покупок
      * @return элемент списка покупок
      */
-    fun getShopItem(shopItemId: Int) : ShopItem {
+    suspend fun getShopItem(shopItemId: Int) : ShopItem {
         return shopListRepository.getShopItem(shopItemId)
     }
 }

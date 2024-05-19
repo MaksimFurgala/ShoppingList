@@ -12,7 +12,7 @@ class DeleteShopItemUseCase(private val shopListRepository: ShopListRepository) 
      *
      * @param shopItem - элемент списка покупок
      */
-    fun deleteShopItem(shopItem: ShopItem) {
+    suspend fun deleteShopItem(shopItem: ShopItem) {
         shopListRepository.deleteShopItem(shopItem)
     }
 }

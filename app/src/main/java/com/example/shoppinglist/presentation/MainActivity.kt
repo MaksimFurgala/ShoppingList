@@ -18,10 +18,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
  * @constructor Create empty Main activity
  */
 class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedListener {
+    private val viewModelFactory by lazy {
+        ShoppingListModelFactory(application)
+    }
     /**
      * View model для main activity.
      */
-    private lateinit var viewModel: MainViewModel
+    private val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+    }
 
     /**
      * Адаптер recycler view списка покупок.
@@ -45,7 +50,8 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
         setupRecyclerView()
 
         // инициализация view model и подписка на объект live data (список покупок)
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        //mWordViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(WordViewModel.class);
+        //viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.shopList.observe(this) {
             shopListAdapter.submitList(it)
         }

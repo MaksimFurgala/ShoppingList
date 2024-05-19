@@ -17,7 +17,14 @@ import com.example.shoppinglist.domain.ShopItem
 import com.google.android.material.textfield.TextInputLayout
 
 class ShopItemFragment : Fragment() {
-    private lateinit var viewModel: ShopItemViewModel
+    private val viewModelFactory by lazy {
+        ShoppingListModelFactory(requireActivity().application)
+    }
+
+    private val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[ShopItemViewModel::class.java]
+    }
+
     private lateinit var onEditingFinishedListener: OnEditingFinishedListener
 
     private var _binding: FragmentShopItemBinding? = null
@@ -64,7 +71,7 @@ class ShopItemFragment : Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[ShopItemViewModel::class.java]
+        //viewModel = ViewModelProvider(this).get(ShopItemViewModel::class.java)
         addTextChangeListeners()
         launchRightMode()
         observeViewModel()

@@ -24,6 +24,6 @@ data class ShopItem(
         /**
          * Дефолтное значение для id элемента списка покупок.
          */
-        const val UNDEFINED_ID = -1
+        const val UNDEFINED_ID = 0
     }
 }
